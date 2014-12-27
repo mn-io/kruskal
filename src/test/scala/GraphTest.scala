@@ -55,4 +55,13 @@ class GraphTest extends MainTest {
     graph.randomFill(9)
     graph.get(0,3) should not be (0)
   }
+
+  "Graph" should "get all nodes as tupel" in {
+    val graph = new Graph(4)
+    var nodes: List[(Int, Int, Int)] = graph.getNodes
+    nodes.length should be (12)
+    nodes.head should be ((0,1,0))
+    nodes = nodes.tail
+    nodes.head should be ((1,0,0))
+  }
 }
