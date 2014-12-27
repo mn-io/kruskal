@@ -1,10 +1,13 @@
 
 object Kruskal {
-  def findShortestPath(nodes : Graph) : List[Tuple3[Int, Int, Int]] = {
-    var result = List.newBuilder[Tuple3[Int, Int, Int]]
-    for(node <- nodes.getNodes()) {
-
+  def findShortestPath(graph : Graph) : Tree = {
+    var result = new Tree
+    var nodes: List[(Int, Int, Int)] = graph.getSortedNodes
+    result.node = nodes.head
+    nodes = nodes.tail
+    for(node <- nodes) {
+      //Todo: code goes here for inserting nodes into tree(s)
     }
-    result.result()
+    result
   }
 }

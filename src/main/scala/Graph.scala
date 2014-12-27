@@ -63,7 +63,7 @@ class Graph(var nodes: Int) {
     matrix.length + 1
   }
 
-  def getNodes() = {
+  def getSortedNodes() = {
     var nodes = List.newBuilder[Tuple3[Int, Int, Int]]
     for (i <- 1 to matrix.length) {
       for (j <- 0 to i - 1) {

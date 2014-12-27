@@ -58,7 +58,7 @@ class GraphTest extends MainTest {
 
   "Graph" should "get all nodes as tupel" in {
     val graph = new Graph(4)
-    var nodes: List[(Int, Int, Int)] = graph.getNodes
+    var nodes: List[(Int, Int, Int)] = graph.getSortedNodes
     nodes.length should be (6)
     nodes.head should be ((0,1,0))
     nodes = nodes.tail
@@ -68,7 +68,7 @@ class GraphTest extends MainTest {
   "Graph" should "get all nodes as tupel sorted" in {
     val graph = new Graph(4)
     graph.randomFill(9)
-    val nodes: List[(Int, Int, Int)] = graph.getNodes
+    val nodes: List[(Int, Int, Int)] = graph.getSortedNodes
     var prev = nodes.head
     for(node <- nodes) {
       if(prev._3 > node._3) {

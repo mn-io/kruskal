@@ -3,6 +3,8 @@ class KruskalTest extends MainTest {
 
   "Kruskal" should "find shortest path" in {
     val graph: Graph = new Graph(4)
-    Kruskal.findShortestPath(graph)
+    graph.randomFill(9)
+    val tree: Tree = Kruskal.findShortestPath(graph)
+    print(tree)
   }
 }
