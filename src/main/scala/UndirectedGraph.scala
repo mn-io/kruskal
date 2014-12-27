@@ -1,4 +1,4 @@
 
-class UndirectedGraph {
+class UndirectedGraph(nodes : Int) extends Graph(nodes) {
 
 }
