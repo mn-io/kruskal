@@ -1,7 +1,18 @@
 
-class Graph(nodes: Int) {
+class Graph(var nodes: Int) {
+  require(nodes > 0)
 
-  private val matrix = Array.ofDim[Int](nodes, nodes)
+  private val matrix = initUndirectedMatrix
+
+  def initUndirectedMatrix = {
+    var j = 1
+    val matrix = Array.ofDim[Array[Int]](nodes - 1)
+    for (i <- 0 to matrix.length - 1) {
+      matrix(i) = Array.ofDim[Int](j)
+      j += 1
+    }
+    matrix
+  }
 
   override def toString = {
     var out = ""
@@ -15,32 +26,38 @@ class Graph(nodes: Int) {
   }
 
   def fill(callback: () => Int) = {
-    var i = 0
-    for (m <- matrix) {
-      var j = 0
-      for (n <- m) {
+    for (i <- 1 to matrix.length) {
+      for (j <- 0 to i-1) {
         set(i, j, callback())
-        j += 1
       }
-      i += 1
     }
   }
 
-  def randomFill(max : Int) = {
+  def randomFill(max: Int) = {
     fill(() => {
-      scala.util.Random.nextInt(max)+1
+      scala.util.Random.nextInt(max) + 1
     })
   }
 
   def get(m: Int, n: Int): Int = {
-    matrix(m)(n)
+    val sorted: (Int, Int) = swap(m, n)
+    matrix(sorted._1)(sorted._2)
   }
 
   def set(m: Int, n: Int, value: Int) = {
-    matrix(m)(n) = value
+    val sorted: (Int, Int) = swap(m, n)
+    matrix(sorted._1)(sorted._2) = value
+  }
+
+  private def swap(m: Int, n: Int) = {
+    if (m > n) {
+      (m - 1, n)
+    } else {
+      (n - 1, m)
+    }
   }
 
   def length = {
-    matrix.length
+    matrix.length + 1
   }
 }

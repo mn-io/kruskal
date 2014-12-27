@@ -1,0 +1,4 @@
+
+class KruskalTest extends MainTest {
+
+}
