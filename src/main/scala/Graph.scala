@@ -72,6 +72,9 @@ class Graph(var nodes: Int) {
         nodes += Tuple3(i, j, get(i, j))
       }
     }
-    nodes.result()
+    val array = nodes.result().to[Array]
+
+    scala.util.Sorting.stableSort(array, (e1: Tuple3[Int, Int, Int], e2: Tuple3[Int, Int, Int]) => e1._3 < e2._3)
+    array.to[List]
   }
 }
