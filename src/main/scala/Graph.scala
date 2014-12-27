@@ -67,9 +67,7 @@ class Graph(var nodes: Int) {
     var nodes = List.newBuilder[Tuple3[Int, Int, Int]]
     for (i <- 1 to matrix.length) {
       for (j <- 0 to i - 1) {
-        // i-1 == matrix(i-1).length-1)
         nodes += Tuple3(j, i, get(j, i))
-        nodes += Tuple3(i, j, get(i, j))
       }
     }
     val array = nodes.result().to[Array]
