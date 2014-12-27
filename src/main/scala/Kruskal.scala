@@ -1,5 +1,5 @@
 
-abstract class Kruskal {
+object Kruskal {
   def findShortestPath(nodes : Graph) = {
 
   }
