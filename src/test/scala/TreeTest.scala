@@ -1,7 +1,7 @@
 
 class TreeTest extends MainTest {
   "Tree" should "be working" in {
-    var nodes: List[(Int, Int, Int)] = new Graph(3).getSortedNodes
+    var nodes: List[(Int, Int, Int)] = new Graph(3).getSortedEdges
     val root = new Tree
     root.node = nodes.head
     nodes = nodes.tail

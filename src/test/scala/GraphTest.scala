@@ -7,7 +7,7 @@ class GraphTest extends MainTest {
     graph.length should be (numberOfNodes)
   }
 
-  "Graph" should "allow get and set to nodes" in {
+  "Graph" should "allow get and set to edges" in {
     val graph = new Graph(4)
     graph.get(0,1) should be (0)
 
@@ -56,25 +56,30 @@ class GraphTest extends MainTest {
     graph.get(0,3) should not be (0)
   }
 
-  "Graph" should "get all nodes as tupel" in {
+  "Graph" should "get all edges as tupel" in {
     val graph = new Graph(4)
-    var nodes: List[(Int, Int, Int)] = graph.getSortedNodes
-    nodes.length should be (6)
-    nodes.head should be ((0,1,0))
-    nodes = nodes.tail
-    nodes.head should be ((0,2,0))
+    var edges: List[(Int, Int, Int)] = graph.getSortedEdges
+    edges.length should be (6)
+    edges.head should be ((0,1,0))
+    edges = edges.tail
+    edges.head should be ((0,2,0))
   }
 
-  "Graph" should "get all nodes as tupel sorted" in {
+  "Graph" should "get all edges as tupel sorted" in {
     val graph = new Graph(4)
     graph.randomFill(9)
-    val nodes: List[(Int, Int, Int)] = graph.getSortedNodes
-    var prev = nodes.head
-    for(node <- nodes) {
-      if(prev._3 > node._3) {
+    val edges: List[(Int, Int, Int)] = graph.getSortedEdges
+    var prev = edges.head
+    for(edge <- edges) {
+      if(prev._3 > edge._3) {
         fail("Not sorted");
       }
-      prev = node
+      prev = edge
     }
+  }
+
+  "Graph" should "get all nodes" in {
+    val graph = new Graph(4)
+    graph.getNodes.length should be (4)
   }
 }

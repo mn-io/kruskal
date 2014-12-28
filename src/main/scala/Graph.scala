@@ -62,16 +62,23 @@ class Graph(var nodes: Int) {
     matrix.length
   }
 
-  def getSortedNodes = {
-    var nodes = List.newBuilder[(Int, Int, Int)]
+  def getSortedEdges = {
+    var edges = List.newBuilder[(Int, Int, Int)]
     for (i <- 0 to matrix.length - 1) {
       for (j <- 0 to matrix(i).length - 1) {
-        nodes += Tuple3(j, i, get(j, i))
+        edges += Tuple3(j, i, get(j, i))
       }
     }
-    val array = nodes.result.to[Array]
-
+    val array = edges.result.to[Array]
     scala.util.Sorting.stableSort(array, (e1: (Int, Int, Int), e2: (Int, Int, Int)) => e1._3 < e2._3)
     array.to[List]
+  }
+
+  def getNodes = {
+    var nodes = List.newBuilder[Int]
+    for (i <- 0 to matrix.length - 1) {
+      nodes += i
+    }
+    nodes.result
   }
 }
