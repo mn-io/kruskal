@@ -6,8 +6,8 @@ class Graph(var nodes: Int) {
   private val matrix = initUndirectedMatrix
 
   def initUndirectedMatrix = {
-    var j = 1
-    val matrix = Array.ofDim[Array[Int]](nodes - 1)
+    var j = 0 // first element of matirx is intended to be blank on purpose to keep logical indexes
+    val matrix = Array.ofDim[Array[Int]](nodes)
     for (i <- 0 to matrix.length - 1) {
       matrix(i) = Array.ofDim[Int](j)
       j += 1
@@ -27,9 +27,8 @@ class Graph(var nodes: Int) {
   }
 
   def fill(callback: () => Int) = {
-    for (i <- 1 to matrix.length) {
-      for (j <- 0 to i - 1) {
-        // i-1 == matrix(i-1).length-1)
+    for (i <- 0 to matrix.length - 1) {
+      for (j <- 0 to matrix(i).length - 1) {
         set(i, j, callback())
       }
     }
@@ -53,26 +52,26 @@ class Graph(var nodes: Int) {
 
   private def swap(m: Int, n: Int) = {
     if (m > n) {
-      (m - 1, n)
+      (m, n)
     } else {
-      (n - 1, m)
+      (n, m)
     }
   }
 
   def length = {
-    matrix.length + 1
+    matrix.length
   }
 
-  def getSortedNodes() = {
-    var nodes = List.newBuilder[Tuple3[Int, Int, Int]]
-    for (i <- 1 to matrix.length) {
-      for (j <- 0 to i - 1) {
+  def getSortedNodes = {
+    var nodes = List.newBuilder[(Int, Int, Int)]
+    for (i <- 0 to matrix.length - 1) {
+      for (j <- 0 to matrix(i).length - 1) {
         nodes += Tuple3(j, i, get(j, i))
       }
     }
-    val array = nodes.result().to[Array]
+    val array = nodes.result.to[Array]
 
-    scala.util.Sorting.stableSort(array, (e1: Tuple3[Int, Int, Int], e2: Tuple3[Int, Int, Int]) => e1._3 < e2._3)
+    scala.util.Sorting.stableSort(array, (e1: (Int, Int, Int), e2: (Int, Int, Int)) => e1._3 < e2._3)
     array.to[List]
   }
 }
