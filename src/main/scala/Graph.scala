@@ -29,7 +29,7 @@ class Graph(var nodes: Int) {
   def fill(callback: () => Int) = {
     for (i <- 0 to matrix.length - 1) {
       for (j <- 0 to matrix(i).length - 1) {
-        set(i, j, callback())
+        set((i, j, callback()))
       }
     }
   }
@@ -45,9 +45,9 @@ class Graph(var nodes: Int) {
     matrix(sorted._1)(sorted._2)
   }
 
-  def set(m: Int, n: Int, value: Int) = {
-    val sorted: (Int, Int) = swap(m, n)
-    matrix(sorted._1)(sorted._2) = value
+  def set(edge: (Int, Int, Int)): Unit = {
+    val sorted: (Int, Int) = swap(edge._1, edge._2)
+    matrix(sorted._1)(sorted._2) = edge._3
   }
 
   private def swap(m: Int, n: Int) = {
@@ -58,11 +58,11 @@ class Graph(var nodes: Int) {
     }
   }
 
-  def length = {
+  def size = {
     matrix.length
   }
 
-  def getSortedEdges = {
+  def getEdges = {
     var edges = List.newBuilder[(Int, Int, Int)]
     for (i <- 0 to matrix.length - 1) {
       for (j <- 0 to matrix(i).length - 1) {
@@ -71,14 +71,35 @@ class Graph(var nodes: Int) {
     }
     val array = edges.result.to[Array]
     scala.util.Sorting.stableSort(array, (e1: (Int, Int, Int), e2: (Int, Int, Int)) => e1._3 < e2._3)
-    array.to[List]
+    array.toList
   }
 
-  def getNodes = {
+  def getSortedEdges = {
+    val array: Array[(Int, Int, Int)] = getEdges.to[Array]
+    scala.util.Sorting.stableSort(array, (e1: (Int, Int, Int), e2: (Int, Int, Int)) => e1._3 < e2._3)
+    array.toList
+  }
+
+  def getNodes(): List[Int] = {
     var nodes = List.newBuilder[Int]
     for (i <- 0 to matrix.length - 1) {
       nodes += i
     }
     nodes.result
+  }
+
+  def getNodes(n: Int): List[Int] = {
+    val nodes = getSortedEdges
+    var result = List.newBuilder[Int]
+    for (node <- nodes) {
+      if (node._3 > 0 && (node._1 == n || node._2 == n)) {
+        if (node._1 == n) {
+          result += node._2
+        } else if (node._2 == n) {
+          result += node._1
+        }
+      }
+    }
+    result.result
   }
 }

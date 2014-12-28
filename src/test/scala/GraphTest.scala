@@ -4,14 +4,14 @@ class GraphTest extends MainTest {
   "Graph" should "initialize with nodes" in {
     val numberOfNodes = 3
     val graph = new Graph(numberOfNodes)
-    graph.length should be (numberOfNodes)
+    graph.size should be (numberOfNodes)
   }
 
   "Graph" should "allow get and set to edges" in {
     val graph = new Graph(4)
     graph.get(0,1) should be (0)
 
-    graph.set(0,1,19)
+    graph.set((0,1,19))
     graph.get(0,1) should be (19)
 
     intercept[IndexOutOfBoundsException] {
@@ -21,22 +21,22 @@ class GraphTest extends MainTest {
       graph.get(5,1)
     }
 
-    graph.set(0,1,19)
-    graph.set(0,2,19)
-    graph.set(0,3,19)
+    graph.set((0,1,19))
+    graph.set((0,2,19))
+    graph.set((0,3,19))
 
-    graph.set(1,2,19)
-    graph.set(1,3,19)
+    graph.set((1,2,19))
+    graph.set((1,3,19))
 
-    graph.set(2,3,19)
+    graph.set((2,3,19))
   }
 
   "Graph" should "be directed" in {
     val graph = new Graph(4)
-    graph.set(1,3, 100)
+    graph.set((1,3, 100))
     graph.get(3,1) should be (100)
 
-    graph.set(3,1, 99)
+    graph.set((3,1, 99))
     graph.get(3,1) should be (99)
     graph.get(1,3) should be (99)
   }
@@ -80,6 +80,14 @@ class GraphTest extends MainTest {
 
   "Graph" should "get all nodes" in {
     val graph = new Graph(4)
-    graph.getNodes.length should be (4)
+    graph.getNodes.length should be (graph.size)
+  }
+
+  "Graph" should "get all nodes neighbours" in {
+    val graph = new Graph(4)
+    graph.randomFill(10)
+    graph.getNodes(3).length should be (3)
+    graph.set((3,1,0))
+    graph.getNodes(3).length should be (2)
   }
 }
