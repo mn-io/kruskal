@@ -37,8 +37,8 @@ class UnionFindTest extends MainTest {
     uf.union(2, 3)
 
     uf.getSet.size should be(2)
-    uf.getSet()(1).size should be(1)
-    uf.getSet()(2).size should be(2)
+    uf.getSet(1).size should be(1)
+    uf.getSet(2).size should be(2)
   }
 
   "UnionFind" should "find non root element after union" in {
@@ -87,6 +87,19 @@ class UnionFindTest extends MainTest {
       }
       uf.union(rnd, i)
       uf.find(i) should be(uf.find(rnd))
+    }
+  }
+
+  "UnionFind" should "throw exception if element not found" in {
+    val set = new mutable.HashSet[Int]
+    set += 1
+    set += 2
+    set += 3
+
+    val uf: UnionFind = new UnionFind(set.toSet)
+
+    a[IllegalArgumentException] should be thrownBy {
+      uf.find(4)
     }
   }
 }

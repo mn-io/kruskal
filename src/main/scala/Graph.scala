@@ -15,6 +15,53 @@ class Graph(var nodes: Int) {
     matrix
   }
 
+  def get(m: Int, n: Int) = {
+    val sorted = swap(m, n)
+    matrix(sorted._1)(sorted._2)
+  }
+
+  def unset(m: Int, n: Int) = set((m, n, Graph.NO_CONNECTION_VALUE))
+
+  def set(edge: (Int, Int, Int)) = {
+    val sorted = swap(edge._1, edge._2)
+    matrix(sorted._1)(sorted._2) = edge._3
+  }
+
+  def getEdges = {
+    var edges = Set.newBuilder[(Int, Int, Int)]
+    for (i <- 0 to matrix.length - 1) {
+      for (j <- 0 to matrix(i).length - 1) {
+        val node = get(j, i)
+        if (node > Graph.NO_CONNECTION_VALUE) {
+          edges += ((j, i, node))
+        }
+      }
+    }
+    edges.result
+  }
+
+  def getSortedEdges = {
+    val array: Array[(Int, Int, Int)] = getEdges.to[Array]
+    scala.util.Sorting.stableSort(array, sortEdgeAscending)
+    array.toList
+  }
+
+  def getNodes: Set[Int] = List.range(0, matrix.length).toSet
+
+  def fill(callback: () => Int) = {
+    for (i <- 0 to matrix.length - 1) {
+      for (j <- 0 to matrix(i).length - 1) {
+        set((i, j, callback()))
+      }
+    }
+  }
+
+  def randomFill(max: Int) = {
+    fill(() => scala.util.Random.nextInt(max) + 1)
+  }
+
+  def size = matrix.length
+
   override def toString = {
     var out = ""
     for (m <- matrix) {
@@ -26,34 +73,6 @@ class Graph(var nodes: Int) {
     out
   }
 
-  def fill(callback: () => Int) = {
-    for (i <- 0 to matrix.length - 1) {
-      for (j <- 0 to matrix(i).length - 1) {
-        set((i, j, callback()))
-      }
-    }
-  }
-
-  def randomFill(max: Int) = {
-    fill(() => {
-      scala.util.Random.nextInt(max) + 1
-    })
-  }
-
-  def get(m: Int, n: Int): Int = {
-    val sorted: (Int, Int) = swap(m, n)
-    matrix(sorted._1)(sorted._2)
-  }
-
-  def unset(m: Int, n: Int) = {
-    set((m, n, Graph.NO_CONNECTION_VALUE))
-  }
-
-  def set(edge: (Int, Int, Int)): Unit = {
-    val sorted: (Int, Int) = swap(edge._1, edge._2)
-    matrix(sorted._1)(sorted._2) = edge._3
-  }
-
   private def swap(m: Int, n: Int) = {
     if (m > n) {
       (m, n)
@@ -62,36 +81,7 @@ class Graph(var nodes: Int) {
     }
   }
 
-  def size = {
-    matrix.length
-  }
-
-  def getEdges = {
-    var edges = List.newBuilder[(Int, Int, Int)]
-    for (i <- 0 to matrix.length - 1) {
-      for (j <- 0 to matrix(i).length - 1) {
-        val node = get(j, i)
-        if (node > Graph.NO_CONNECTION_VALUE) {
-          edges += Tuple3(j, i, node)
-        }
-      }
-    }
-    edges.result
-  }
-
-  def getSortedEdges = {
-    val array: Array[(Int, Int, Int)] = getEdges.to[Array]
-    scala.util.Sorting.stableSort(array, (e1: (Int, Int, Int), e2: (Int, Int, Int)) => e1._3 < e2._3)
-    array.toList
-  }
-
-  def getNodes: Set[Int] = {
-    var nodes = Set.newBuilder[Int]
-    for (i <- 0 to matrix.length - 1) {
-      nodes += i
-    }
-    nodes.result
-  }
+  private def sortEdgeAscending = (e1: (Int, Int, Int), e2: (Int, Int, Int)) => e1._3 < e2._3
 }
 
 object Graph {

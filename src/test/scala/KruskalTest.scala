@@ -1,11 +1,17 @@
 
 class KruskalTest extends MainTest {
 
-  //  "Kruskal" should "find shortest path" in {
-  //    val graph: Graph = new Graph(4)
-  //    graph.randomFill(9)
-  //    val result = Kruskal.findShortestPath(graph)
-  //  }
+  "Kruskal" should "find shortest path heavily" in {
+    a[IllegalArgumentException] should be thrownBy {
+      new Graph(0)
+    }
+
+    for (i <- 1 to 100) {
+      val graph: Graph = new Graph(i)
+      graph.randomFill(i+5)
+      Kruskal.findShortestPath(graph)
+    }
+  }
 
   "Graph" should "find shortest path like in wikipedia" in {
     // Data taken from https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
