@@ -1,6 +1,6 @@
-import scala.collection.mutable._
+import scala.collection._
 
-class UnionFind(elements: Set[Int]) {
+class UnionFind(elements: immutable.Set[Int]) {
 
   private val sets = makeSet(elements)
 
@@ -25,11 +25,11 @@ class UnionFind(elements: Set[Int]) {
     throw new IllegalArgumentException("Element " + element + " does not belong to any set.")
   }
 
-  def makeSet(elements: Set[Int]): Map[Int, Set[Int]] = {
-    val map = new HashMap[Int, Set[Int]]
+  def makeSet(elements: Set[Int]): mutable.Map[Int, Set[Int]] = {
+    val map = new mutable.HashMap[Int, Set[Int]]
 
     for (element: Int <- elements) {
-      var set = new HashSet[Int]()
+      var set = new mutable.HashSet[Int]()
       set += element
       map += (element -> set)
     }

@@ -1,9 +1,9 @@
-import scala.collection.mutable._
+import scala.collection._
 
 class UnionFindTest extends MainTest {
 
   "UnionFind" should "init" in {
-    val set = new HashSet[Int]
+    val set = new mutable.HashSet[Int]
     set += 1
     set += 2
     set += 3
@@ -11,26 +11,26 @@ class UnionFindTest extends MainTest {
     val size: Int = 3
 
     set.size should be(size)
-    val uf: UnionFind = new UnionFind(set)
+    val uf: UnionFind = new UnionFind(set.toSet)
 
     uf.getSet.size should be(size)
   }
 
   "UnionFind" should "find root element" in {
-    val set = new HashSet[Int]
+    val set = new mutable.HashSet[Int]
     set += 1
     set += 2
     set += 3
-    val uf: UnionFind = new UnionFind(set)
+    val uf: UnionFind = new UnionFind(set.toSet)
     uf.find(2) should be(2)
   }
 
   "UnionFind" should "union two sets" in {
-    val set = new HashSet[Int]
+    val set = new mutable.HashSet[Int]
     set += 1
     set += 2
     set += 3
-    val uf: UnionFind = new UnionFind(set)
+    val uf: UnionFind = new UnionFind(set.toSet)
 
     uf.getSet.size should be(3)
 
@@ -42,11 +42,11 @@ class UnionFindTest extends MainTest {
   }
 
   "UnionFind" should "find non root element after union" in {
-    val set = new HashSet[Int]
+    val set = new mutable.HashSet[Int]
     set += 1
     set += 2
     set += 3
-    val uf: UnionFind = new UnionFind(set)
+    val uf: UnionFind = new UnionFind(set.toSet)
 
     uf.union(2, 3)
 
@@ -55,13 +55,13 @@ class UnionFindTest extends MainTest {
   }
 
   "UnionFind" should "union all elements to first set" in {
-    val set = new HashSet[Int]
+    val set = new mutable.HashSet[Int]
     val range: List[Int] = List.range(0, 20)
     for (i <- range) {
       set += i
     }
 
-    val uf: UnionFind = new UnionFind(set)
+    val uf: UnionFind = new UnionFind(set.toSet)
 
     for (i <- range.tail) {
       uf.union(i - 1, i)
@@ -72,13 +72,13 @@ class UnionFindTest extends MainTest {
   }
 
   "UnionFind" should "union all elements to random set" in {
-    val set = new HashSet[Int]
+    val set = new mutable.HashSet[Int]
     val range: List[Int] = List.range(0, 20)
     for (i <- range) {
       set += i
     }
 
-    val uf: UnionFind = new UnionFind(set)
+    val uf: UnionFind = new UnionFind(set.toSet)
 
     for (i <- range.tail) {
       var rnd = scala.util.Random.nextInt(20)
