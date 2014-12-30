@@ -28,7 +28,6 @@ class KruskalTest extends MainTest {
     graph.set((5, 6, 11))
 
     val path = Kruskal.findShortestPath(graph)
-    print(path)
 
     path.get(0, 1) should be(7)
     path.get(0, 3) should be(5)
