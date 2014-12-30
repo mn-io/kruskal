@@ -86,9 +86,7 @@ class UnionFindTest extends MainTest {
         rnd = scala.util.Random.nextInt(20)
       }
       uf.union(rnd, i)
-      uf.getSet.size should be(20 - i)
       uf.find(i) should be(uf.find(rnd))
     }
-    uf.getSet.size should be(1)
   }
 }
