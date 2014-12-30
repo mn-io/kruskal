@@ -82,12 +82,4 @@ class GraphTest extends MainTest {
     val graph = new Graph(4)
     graph.getNodes.length should be (graph.size)
   }
-
-  "Graph" should "get all nodes neighbours" in {
-    val graph = new Graph(4)
-    graph.randomFill(10)
-    graph.getNodes(3).length should be (3)
-    graph.set((3,1,0))
-    graph.getNodes(3).length should be (2)
-  }
 }

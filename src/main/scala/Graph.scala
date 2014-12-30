@@ -6,7 +6,7 @@ class Graph(var nodes: Int) {
   private val matrix = initUndirectedMatrix
 
   def initUndirectedMatrix = {
-    var j = 0 // first element of matirx is intended to be blank on purpose to keep logical indexes
+    var j = 0 // first element of matrix is intended to be blank on purpose to keep logical indexes
     val matrix = Array.ofDim[Array[Int]](nodes)
     for (i <- 0 to matrix.length - 1) {
       matrix(i) = Array.ofDim[Int](j)
@@ -45,6 +45,10 @@ class Graph(var nodes: Int) {
     matrix(sorted._1)(sorted._2)
   }
 
+  def unset(m: Int, n: Int) = {
+    set((m, n, Graph.NO_CONNECTION_VALUE))
+  }
+
   def set(edge: (Int, Int, Int)): Unit = {
     val sorted: (Int, Int) = swap(edge._1, edge._2)
     matrix(sorted._1)(sorted._2) = edge._3
@@ -66,7 +70,10 @@ class Graph(var nodes: Int) {
     var edges = List.newBuilder[(Int, Int, Int)]
     for (i <- 0 to matrix.length - 1) {
       for (j <- 0 to matrix(i).length - 1) {
-        edges += Tuple3(j, i, get(j, i))
+        val node = get(j, i)
+        if (node > Graph.NO_CONNECTION_VALUE) {
+          edges += Tuple3(j, i, node)
+        }
       }
     }
     val array = edges.result.to[Array]
@@ -87,19 +94,8 @@ class Graph(var nodes: Int) {
     }
     nodes.result
   }
+}
 
-  def getNodes(n: Int): List[Int] = {
-    val nodes = getSortedEdges
-    var result = List.newBuilder[Int]
-    for (node <- nodes) {
-      if (node._3 > 0 && (node._1 == n || node._2 == n)) {
-        if (node._1 == n) {
-          result += node._2
-        } else if (node._2 == n) {
-          result += node._1
-        }
-      }
-    }
-    result.result
-  }
+object Graph {
+  val NO_CONNECTION_VALUE = 0
 }
