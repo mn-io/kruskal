@@ -38,18 +38,18 @@ class KruskalTest extends MainTest {
     path.get(0, 1) should be(7)
     path.get(0, 3) should be(5)
 
-    path.get(1, 2) should be(Graph.NO_CONNECTION_VALUE)
-    path.get(1, 3) should be(Graph.NO_CONNECTION_VALUE)
+    path.get(1, 2) should be(Graph.NO_CONNECTION_WEIGHT)
+    path.get(1, 3) should be(Graph.NO_CONNECTION_WEIGHT)
     path.get(1, 4) should be(7)
 
     path.get(2, 4) should be(5)
 
-    path.get(3, 4) should be(Graph.NO_CONNECTION_VALUE)
+    path.get(3, 4) should be(Graph.NO_CONNECTION_WEIGHT)
     path.get(3, 5) should be(6)
 
-    path.get(4, 5) should be(Graph.NO_CONNECTION_VALUE)
+    path.get(4, 5) should be(Graph.NO_CONNECTION_WEIGHT)
     path.get(4, 6) should be(9)
 
-    path.get(5, 6) should be(Graph.NO_CONNECTION_VALUE)
+    path.get(5, 6) should be(Graph.NO_CONNECTION_WEIGHT)
   }
 }

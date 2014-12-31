@@ -4,7 +4,7 @@ class UnionFind(elements: immutable.Set[Int]) {
 
   private val sets = makeSet(elements)
 
-  def makeSet(elements: Set[Int]): mutable.Map[Int, Set[Int]] = {
+  def makeSet(elements: Set[Int]) = {
     val map = new mutable.HashMap[Int, Set[Int]]
     for (element: Int <- elements) {
       var set = new mutable.HashSet[Int]
@@ -15,9 +15,7 @@ class UnionFind(elements: immutable.Set[Int]) {
   }
 
   def union(elementX: Int, elementY: Int): Unit = {
-    if (elementX == elementY) {
-      return
-    }
+    if (elementX == elementY) return
 
     val rootX = find(elementX)
     val rootY = find(elementY)

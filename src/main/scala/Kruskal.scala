@@ -4,9 +4,7 @@ object Kruskal {
 
   def findShortestPath(graph: Graph): Graph = {
     val edges = graph.getSortedEdges
-    if (edges.length <= 1) {
-      return graph
-    }
+    if (edges.length <= 1) return graph
 
     val result = new Graph(graph.size)
     val unionFind = new UnionFind(graph.getNodes)

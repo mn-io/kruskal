@@ -6,11 +6,9 @@ class Graph(var nodes: Int) {
   private val matrix = initUndirectedMatrix
 
   def initUndirectedMatrix = {
-    var j = 0 // first element of matrix is intended to be blank on purpose to keep logical indexes
     val matrix = Array.ofDim[Array[Int]](nodes)
     for (i <- 0 to matrix.length - 1) {
-      matrix(i) = Array.ofDim[Int](j)
-      j += 1
+      matrix(i) = Array.ofDim[Int](i)
     }
     matrix
   }
@@ -20,7 +18,7 @@ class Graph(var nodes: Int) {
     matrix(sorted._1)(sorted._2)
   }
 
-  def unset(m: Int, n: Int) = set((m, n, Graph.NO_CONNECTION_VALUE))
+  def unset(m: Int, n: Int) = set((m, n, Graph.NO_CONNECTION_WEIGHT))
 
   def set(edge: (Int, Int, Int)) = {
     val sorted = swap(edge._1, edge._2)
@@ -29,12 +27,10 @@ class Graph(var nodes: Int) {
 
   def getEdges = {
     var edges = Set.newBuilder[(Int, Int, Int)]
-    for (i <- 0 to matrix.length - 1) {
-      for (j <- 0 to matrix(i).length - 1) {
-        val node = get(j, i)
-        if (node > Graph.NO_CONNECTION_VALUE) {
-          edges += ((j, i, node))
-        }
+    for (i <- 0 to matrix.length - 1; j <- 0 to matrix(i).length - 1) {
+      val weight = get(j, i)
+      if (weight > Graph.NO_CONNECTION_WEIGHT) {
+        edges += ((j, i, weight))
       }
     }
     edges.result
@@ -46,13 +42,11 @@ class Graph(var nodes: Int) {
     array.toList
   }
 
-  def getNodes: Set[Int] = List.range(0, matrix.length).toSet
+  def getNodes = List.range(0, matrix.length).toSet
 
   def fill(callback: () => Int) = {
-    for (i <- 0 to matrix.length - 1) {
-      for (j <- 0 to matrix(i).length - 1) {
-        set((i, j, callback()))
-      }
+    for (i <- 0 to matrix.length - 1; j <- 0 to matrix(i).length - 1) {
+      set((i, j, callback()))
     }
   }
 
@@ -74,16 +68,13 @@ class Graph(var nodes: Int) {
   }
 
   private def swap(m: Int, n: Int) = {
-    if (m > n) {
-      (m, n)
-    } else {
-      (n, m)
-    }
+    if (m > n) (m, n)
+    else (n, m)
   }
 
   private def sortEdgeAscending = (e1: (Int, Int, Int), e2: (Int, Int, Int)) => e1._3 < e2._3
 }
 
 object Graph {
-  val NO_CONNECTION_VALUE = 0
+  val NO_CONNECTION_WEIGHT = 0
 }

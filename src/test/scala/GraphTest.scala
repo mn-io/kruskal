@@ -56,7 +56,7 @@ class GraphTest extends MainTest {
     graph.get(0, 3) should not be (0)
   }
 
-  "Graph" should "get all edges as tuple" in {
+  "Graph" should "get all edges as tuples" in {
     val graph = new Graph(4)
     graph.getSortedEdges.length should be(0)
 
@@ -64,7 +64,7 @@ class GraphTest extends MainTest {
     graph.getSortedEdges.length should be(6)
   }
 
-  "Graph" should "get all edges as tuple sorted" in {
+  "Graph" should "get all edges as tuples sorted" in {
     val graph = new Graph(4)
     graph.randomFill(9)
     val edges: List[(Int, Int, Int)] = graph.getSortedEdges
