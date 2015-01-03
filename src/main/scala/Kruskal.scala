@@ -6,8 +6,8 @@ object Kruskal {
     val edges = graph.getSortedEdges
     if (edges.length <= 1) return graph
 
-    val result = new Graph(graph.size)
-    val unionFind = new UnionFind(graph.getNodes)
+    val result = Graph(graph.size)
+    val unionFind = UnionFind(graph.getNodes)
 
     for (edge <- edges) {
       val edgesConnected = unionFind.find(edge._1) == unionFind.find(edge._2)

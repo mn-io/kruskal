@@ -1,6 +1,6 @@
 
 
-class Graph(var nodes: Int) {
+class Graph(nodes: Int) {
   require(nodes > 0)
 
   private val matrix = initUndirectedMatrix
@@ -77,4 +77,8 @@ class Graph(var nodes: Int) {
 
 object Graph {
   val NO_CONNECTION_WEIGHT = 0
+
+  def apply(nodes: Int) = {
+    new Graph(nodes)
+  }
 }

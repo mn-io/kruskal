@@ -3,12 +3,12 @@ class GraphTest extends MainTest {
 
   "Graph" should "initialize with nodes" in {
     val numberOfNodes = 3
-    val graph = new Graph(numberOfNodes)
+    val graph = Graph(numberOfNodes)
     graph.size should be(numberOfNodes)
   }
 
   "Graph" should "allow get and set to edges" in {
-    val graph = new Graph(4)
+    val graph = Graph(4)
     graph.get(0, 1) should be(0)
 
     graph.set((0, 1, 19))
@@ -32,7 +32,7 @@ class GraphTest extends MainTest {
   }
 
   "Graph" should "be directed" in {
-    val graph = new Graph(4)
+    val graph = Graph(4)
     graph.set((1, 3, 100))
     graph.get(3, 1) should be(100)
 
@@ -42,7 +42,7 @@ class GraphTest extends MainTest {
   }
 
   "Graph" should "fill with values" in {
-    val graph = new Graph(4)
+    val graph = Graph(4)
     graph.fill(() => {
       3
     })
@@ -51,13 +51,13 @@ class GraphTest extends MainTest {
   }
 
   "Graph" should "fill with random values" in {
-    val graph = new Graph(4)
+    val graph = Graph(4)
     graph.randomFill(9)
     graph.get(0, 3) should not be (0)
   }
 
   "Graph" should "get all edges as tuples" in {
-    val graph = new Graph(4)
+    val graph = Graph(4)
     graph.getSortedEdges.length should be(0)
 
     graph.randomFill(9)
@@ -65,7 +65,7 @@ class GraphTest extends MainTest {
   }
 
   "Graph" should "get all edges as tuples sorted" in {
-    val graph = new Graph(4)
+    val graph = Graph(4)
     graph.randomFill(9)
     val edges: List[(Int, Int, Int)] = graph.getSortedEdges
     var prev = edges.head
@@ -78,7 +78,7 @@ class GraphTest extends MainTest {
   }
 
   "Graph" should "get all nodes" in {
-    val graph = new Graph(4)
+    val graph = Graph(4)
     graph.getNodes.size should be(graph.size)
   }
 }

@@ -5,9 +5,9 @@ class UnionFind(elements: immutable.Set[Int]) {
   private val sets = makeSet(elements)
 
   def makeSet(elements: Set[Int]) = {
-    val map = new mutable.HashMap[Int, Set[Int]]
+    val map = mutable.HashMap[Int, Set[Int]]()
     for (element: Int <- elements) {
-      var set = new mutable.HashSet[Int]
+      var set = mutable.HashSet[Int]()
       set += element
       map += (element -> set)
     }
@@ -36,9 +36,13 @@ class UnionFind(elements: immutable.Set[Int]) {
   def getSet = {
     sets.toMap
   }
+}
 
-  object UnionFind {
-    val NO_SET_FOUND: String = "Element does not belong to any set: "
+object UnionFind {
+  val NO_SET_FOUND: String = "Element does not belong to any set: "
+
+
+  def apply(elements: immutable.Set[Int]) = {
+    new UnionFind(elements)
   }
-
 }
