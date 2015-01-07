@@ -1,5 +1,3 @@
-
-
 object Kruskal {
 
   def findShortestPath(graph: Graph): Graph = {
@@ -19,5 +17,4 @@ object Kruskal {
 
     result
   }
-
 }

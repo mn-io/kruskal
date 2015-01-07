@@ -9,3 +9,8 @@ Code is written in *Scala*, using SBT to load dependencies for unit tests.
 - UnionFind: uses multiple sets to solve problem, no tree balancing and other optimizations
 
 For documentation of functionality take a look at unit tests
+
+Run via SBT:
+
+- run: runs Demo
+- test: runs tests

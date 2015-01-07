@@ -1,5 +1,3 @@
-
-
 class Graph(nodes: Int) {
   require(nodes > 0)
 
@@ -57,12 +55,25 @@ class Graph(nodes: Int) {
   def size = matrix.length
 
   override def toString = {
-    var out = ""
+    var out = "    " + 0.to(size - 1).mkString(" ") + "\n"
+    out += "   " + "-" * size * 2 + "\n"
+
+    var i = 0
+
     for (m <- matrix) {
+      out += i + " |"
+
       for (n <- m) {
-        out += " " + n
+        out += " "
+        if (n == Graph.NO_CONNECTION_WEIGHT) {
+          out += " "
+        } else {
+          out += n
+        }
       }
+
       out += "\n"
+      i = i + 1
     }
     out
   }

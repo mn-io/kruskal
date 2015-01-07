@@ -1,7 +1,7 @@
 
 class KruskalTest extends MainTest {
 
-  "Kruskal" should "find shortest path heavily" in {
+  "Kruskal" should "find shortest path from 0 to 100 nodes size" in {
     a[IllegalArgumentException] should be thrownBy {
       Graph(0)
     }

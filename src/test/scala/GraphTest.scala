@@ -14,10 +14,10 @@ class GraphTest extends MainTest {
     graph.set((0, 1, 19))
     graph.get(0, 1) should be(19)
 
-    intercept[IndexOutOfBoundsException] {
+    a[IndexOutOfBoundsException] should be thrownBy {
       graph.get(0, 5)
     }
-    intercept[IndexOutOfBoundsException] {
+    a[IndexOutOfBoundsException] should be thrownBy {
       graph.get(5, 1)
     }
 
