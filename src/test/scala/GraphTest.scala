@@ -4,7 +4,7 @@ class GraphTest extends MainTest {
   "Graph" should "initialize with nodes" in {
     val numberOfNodes = 3
     val graph = Graph(numberOfNodes)
-    graph.size should be(numberOfNodes)
+    graph.getNodes.size should be(numberOfNodes)
   }
 
   "Graph" should "allow get and set to edges" in {
@@ -79,6 +79,6 @@ class GraphTest extends MainTest {
 
   "Graph" should "get all nodes" in {
     val graph = Graph(4)
-    graph.getNodes.size should be(graph.size)
+    graph.getNodes.size should be(graph.getNodes.size)
   }
 }

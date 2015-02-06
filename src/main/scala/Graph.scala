@@ -52,11 +52,9 @@ class Graph(nodes: Int) {
     fill(() => scala.util.Random.nextInt(max) + 1)
   }
 
-  def size = matrix.length
-
   override def toString = {
-    var out = "    " + 0.to(size - 1).mkString(" ") + "\n"
-    out += "   " + "-" * size * 2 + "\n"
+    var out = "    " + 0.to(getNodes.size - 1).mkString(" ") + "\n"
+    out += "   " + "-" * getNodes.size * 2 + "\n"
 
     var i = 0
 
