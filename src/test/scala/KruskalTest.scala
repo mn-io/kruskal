@@ -6,11 +6,21 @@ class KruskalTest extends MainTest {
       Graph(0)
     }
 
+    var totalTime = 0.0;
+    
     for (i <- 1 to 100) {
       val graph: Graph = Graph(i)
-      graph.randomFill(i+5)
+      graph.uniqueCompleteFill()
+      //graph.randomFill(i+5)
+      
+      val startTime = System.nanoTime
       Kruskal.findShortestPath(graph)
+      val currentTime = (System.nanoTime - startTime) / 1e6
+      totalTime = totalTime + currentTime
+      println("Time: " + currentTime + "ms - " + graph.getEdges.size + " Edges, " + graph.getNodes.size + " Nodes")
     }
+    println("=======================================")
+    println("Total time: " + totalTime + "ms" )
   }
 
   "Kruskal" should "find shortest path like in wikipedia" in {
