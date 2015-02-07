@@ -11,7 +11,6 @@ class KruskalTest extends MainTest {
     for (i <- 1 to 100) {
       val graph: Graph = Graph(i)
       graph.uniqueCompleteFill()
-      //graph.randomFill(i+5)
       
       val startTime = System.nanoTime
       Kruskal.findShortestPath(graph)
