@@ -50,17 +50,11 @@ class GraphTest extends MainTest {
     graph.get(0, 3) should be(3)
   }
 
-  "Graph" should "fill with random values" in {
-    val graph = Graph(4)
-    graph.randomFill(9)
-    graph.get(0, 3) should not be (0)
-  }
-
   "Graph" should "get all edges as tuples" in {
     val graph = Graph(4)
     graph.getSortedEdges.length should be(0)
 
-    graph.randomFill(9)
+    graph.uniqueCompleteFill
     graph.getSortedEdges.length should be(6)
   }
 

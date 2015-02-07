@@ -49,7 +49,7 @@ class Graph(nodes: Int) {
   }
 
   def randomFill(max: Int) = {
-    fill(() => scala.util.Random.nextInt(max) + 1)
+    fill(() => scala.util.Random.nextInt(max))
   }
 
   def uniqueCompleteFill = {
