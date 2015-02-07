@@ -52,7 +52,7 @@ class Graph(nodes: Int) {
     fill(() => scala.util.Random.nextInt(max) + 1)
   }
 
-  def uniqueCompleteFill() = {
+  def uniqueCompleteFill = {
     var weight = 1
     for (i <- 0 to matrix.length - 1; j <- 0 to matrix(i).length - 1) {
       set((i, j, weight))

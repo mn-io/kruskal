@@ -1,17 +1,25 @@
 
 class KruskalTest extends MainTest {
 
-  "Kruskal" should "find shortest path from 0 to 100 nodes size" in {
+  "Kruskal" should "find shortest path from 0 to 100 nodes randomly filled" in {
     a[IllegalArgumentException] should be thrownBy {
       Graph(0)
     }
-
-    var totalTime = 0.0;
-    
     for (i <- 1 to 100) {
       val graph: Graph = Graph(i)
-      graph.uniqueCompleteFill()
-      
+      graph.randomFill(i * 2)
+
+      Kruskal.findShortestPath(graph)
+    }
+  }
+
+  "Kruskal" should "benchmark of shortest path from 0 to 100 nodes" in {
+    var totalTime = 0.0;
+
+    for (i <- 1 to 100) {
+      val graph: Graph = Graph(i)
+      graph.uniqueCompleteFill
+
       val startTime = System.nanoTime
       Kruskal.findShortestPath(graph)
       val currentTime = (System.nanoTime - startTime) / 1e6
@@ -19,7 +27,7 @@ class KruskalTest extends MainTest {
       println("Time: " + currentTime + "ms - " + graph.getEdges.size + " Edges, " + graph.getNodes.size + " Nodes")
     }
     println("=======================================")
-    println("Total time: " + totalTime + "ms" )
+    println("Total time: " + totalTime + "ms")
   }
 
   "Kruskal" should "find shortest path like in wikipedia" in {
