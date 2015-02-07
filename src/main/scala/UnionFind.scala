@@ -2,16 +2,21 @@ import scala.collection._
 
 class UnionFind(elements: immutable.Set[Int]) {
 
-  private val sets = makeSet(elements)
+  private val sets = makeSets(elements)
 
-  def makeSet(elements: Set[Int]) = {
-    val map = mutable.HashMap[Int, Set[Int]]()
+  def makeSets(elements: immutable.Set[Int]) = {
+    val map = mutable.HashMap[Int, immutable.Set[Int]]()
     for (element: Int <- elements) {
-      var set = mutable.HashSet[Int]()
-      set += element
+      val set = makeSet(element)
       map += (element -> set)
     }
     map
+  }
+
+  def makeSet(element: Int): immutable.Set[Int]= {
+    var set = mutable.HashSet[Int]()
+    set += element
+    set.toSet
   }
 
   def union(elementX: Int, elementY: Int): Unit = {
