@@ -18,6 +18,6 @@ object Kruskal {
       edges = edges.tail
     }
 
-    return result
+    result
   }
 }
