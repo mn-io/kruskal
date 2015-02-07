@@ -8,7 +8,7 @@ object Kruskal {
 
     var edges = graph.getSortedEdges                      // O(e * log(e))
 
-    while (edges.size > 0 || unionFind.getSet.size > 1) { // O(n)
+    while (unionFind.getSet.size > 1 && edges.size > 0 ) { // O(n)
       val edge = edges(0)
 
       val edgesConnected = unionFind.find(edge._1) == unionFind.find(edge._2)
