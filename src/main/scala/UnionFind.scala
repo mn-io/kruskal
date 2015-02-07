@@ -13,7 +13,7 @@ class UnionFind(elements: immutable.Set[Int]) {
     map
   }
 
-  def makeSet(element: Int): immutable.Set[Int]= {
+  def makeSet(element: Int): immutable.Set[Int] = {
     var set = mutable.HashSet[Int]()
     set += element
     set.toSet
