@@ -13,23 +13,75 @@ class KruskalTest extends MainTest {
     }
   }
 
-  "Kruskal" should "benchmark of shortest path from 0 to 100 nodes" in {
-    var totalTime = 0.0;
+  "Kruskal" should "benchmark of shortest path with random weights" in {
+    var totalTime = 0.0
+    var localTime = 0.0
+    val limit: Int = 1000
 
-    for (i <- 1 to 100) {
+    val result = new StringBuilder
+
+    println("Start benchmark: random mode")
+
+    for (i <- 1 to limit) {
+      val graph: Graph = Graph(i)
+      graph.randomFill(i * 2)
+
+      val startTime = System.nanoTime
+
+      Kruskal.findShortestPath(graph)
+
+      val currentTime = (System.nanoTime - startTime) / 1e6
+      totalTime = totalTime + currentTime
+      localTime = localTime + currentTime
+
+      result.append("Time: " + currentTime + "ms - " + graph.getEdges.size + " Edges, " + graph.getNodes.size + " Nodes\n")
+      if(i % 10 == 0) {
+        println(i + "/" + limit + " done in " + localTime.toInt + "ms")
+        localTime = 0.0
+      }
+    }
+
+    println("=======================================")
+    print(result)
+    println("=======================================")
+    println("Random run - Total time: " + totalTime + "ms")
+  }
+
+  "Kruskal" should "benchmark of shortest path from 0 to 100 nodes" in {
+    var totalTime = 0.0
+    var localTime = 0.0
+    val limit: Int = 1000
+
+    val result = new StringBuilder
+
+    println("Start benchmark: normal mode")
+
+    for (i <- 1 to limit) {
       val graph: Graph = Graph(i)
       graph.uniqueCompleteFill
 
       val startTime = System.nanoTime
+
       Kruskal.findShortestPath(graph)
+
       val currentTime = (System.nanoTime - startTime) / 1e6
       totalTime = totalTime + currentTime
-      println("Time: " + currentTime + "ms - " + graph.getEdges.size + " Edges, " + graph.getNodes.size + " Nodes")
+      localTime = localTime + currentTime
+
+      result.append("Time: " + currentTime + "ms - " + graph.getEdges.size + " Edges, " + graph.getNodes.size + " Nodes\n")
+      if(i % 10 == 0) {
+        println(i + "/" + limit + " done in " + localTime.toInt + "ms")
+        localTime = 0.0
+      }
     }
+
     println("=======================================")
-    println("Total time: " + totalTime + "ms")
+    print(result)
+    println("=======================================")
+    println("Normal run - Total time: " + totalTime + "ms")
   }
 
+  
   "Kruskal" should "find shortest path like in wikipedia" in {
     // Data taken from https://en.wikipedia.org/wiki/Kruskal%27s_algorithm
     val graph = Graph(7)
