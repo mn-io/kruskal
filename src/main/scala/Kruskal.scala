@@ -5,9 +5,11 @@ object Kruskal {
     val unionFind = UnionFind(graph.getNodes)               // n
 
     var edges = graph.getSortedEdges                        // e * log(e)
-
-    while (unionFind.getSet.size > 1 && edges.size > 0) {   // n*(
-      val edge = edges(0)                                   //   1
+    
+    for(edge <- edges) {                                    // e*(
+      //if(unionFind.size <= 1) return result
+      val hasMaximumEdges = result.getEdges.size >= graph.getNodes.size - 1 //3
+      if(hasMaximumEdges) return result                     //   1
 
       val edgesConnected = 
         unionFind.find(edge._1) == unionFind.find(edge._2)  //   2e
@@ -15,8 +17,6 @@ object Kruskal {
         result.set(edge)                                    //   1
         unionFind.union(edge._1, edge._2)                   //   2e
       }
-
-      edges = edges.tail                                    //   n
     }                                                       // )
 
     result

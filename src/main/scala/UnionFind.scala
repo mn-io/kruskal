@@ -37,7 +37,9 @@ class UnionFind(elements: immutable.Set[Int]) {
     for (set <- sets if set._2 contains (element)) yield return set._1
     throw new IllegalArgumentException(UnionFind.NO_SET_FOUND + element)
   }
-
+  
+  def size = sets.size
+  
   def getSet = {
     sets.toMap
   }
