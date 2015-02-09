@@ -47,7 +47,7 @@ class KruskalTest extends MainTest {
     println("Random run - Total time: " + totalTime + "ms")
   }
 
-  "Kruskal" should "benchmark of shortest path from 0 to 100 nodes" in {
+  "Kruskal" should "benchmark of shortest path from unique weights" in {
     var totalTime = 0.0
     var localTime = 0.0
     val limit: Int = 250
