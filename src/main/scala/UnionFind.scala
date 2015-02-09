@@ -34,12 +34,15 @@ class UnionFind(elements: immutable.Set[Int]) {
   }
 
   def find(element: Int): Int = {
-    for (set <- sets if set._2 contains (element)) yield return set._1
+    val represent = sets.get(element)
+    if (represent != None) return element
+
+    for (set <- sets if set._2 contains(element)) yield return set._1
     throw new IllegalArgumentException(UnionFind.NO_SET_FOUND + element)
   }
-  
+
   def size = sets.size
-  
+
   def getSet = {
     sets.toMap
   }

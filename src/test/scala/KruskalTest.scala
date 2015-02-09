@@ -16,7 +16,7 @@ class KruskalTest extends MainTest {
   "Kruskal" should "benchmark of shortest path with random weights" in {
     var totalTime = 0.0
     var localTime = 0.0
-    val limit: Int = 1000
+    val limit: Int = 250
 
     val result = new StringBuilder
 
@@ -50,7 +50,7 @@ class KruskalTest extends MainTest {
   "Kruskal" should "benchmark of shortest path from 0 to 100 nodes" in {
     var totalTime = 0.0
     var localTime = 0.0
-    val limit: Int = 1000
+    val limit: Int = 250
 
     val result = new StringBuilder
 
